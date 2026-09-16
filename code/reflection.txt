@@ -1,10 +1,16 @@
 The main thing I learned is the idea of a module versus an interface: bill.py holds
 the four functions (tip_amount, grand_total, split_evenly, is_generous) and the
-console, notebook, and Streamlit files just import them. I liked that the unit
-tests call the functions directly, so when test_split_evenly passed I knew the math
-was right before I touched any interface.
+console, notebook, and Streamlit files just import them. Because the unit tests
+call the functions directly, test_split_evenly passing told me the math was right
+before I touched any interface — that is the point of separating the two.
 
-I struggled with the Streamlit part. My dashboard runs and shows the right numbers,
-but test_streamlit_app fails with a KeyError, and I haven't figured out what it's
-looking for yet. I also want more practice with pandas since I mostly copied the
-DataFrame pattern for the bar chart.
+My first submission failed test_streamlit_app with a KeyError even though the app
+looked correct in the browser. Reading the test showed me why: AppTest looks up
+widgets by their key= argument (key="subtotal", key="tip", key="people") and reads
+results from st.metric tiles, and I had used st.write with no keys. So the
+integration test was checking the *structure* of my interface, not just the numbers.
+Adding the keys and switching to st.columns + st.metric fixed it.
+
+Next I want to practice building a pandas DataFrame from a dict and an index on my
+own (I copied that pattern for the bar chart), and to try writing a small AppTest
+myself so the integration tests stop feeling like a black box.
