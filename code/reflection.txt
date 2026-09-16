@@ -1,1 +1,10 @@
+The main thing I learned is the idea of a module versus an interface: bill.py holds
+the four functions (tip_amount, grand_total, split_evenly, is_generous) and the
+console, notebook, and Streamlit files just import them. I liked that the unit
+tests call the functions directly, so when test_split_evenly passed I knew the math
+was right before I touched any interface.
 
+I struggled with the Streamlit part. My dashboard runs and shows the right numbers,
+but test_streamlit_app fails with a KeyError, and I haven't figured out what it's
+looking for yet. I also want more practice with pandas since I mostly copied the
+DataFrame pattern for the bar chart.
